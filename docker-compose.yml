@@ -1,0 +1,26 @@
+version: '3.9'
+
+services: 
+  clickhouse-server:
+    image: yandex/clickhouse-server:21.9.2.17
+    container_name: clickhouse-server
+    ports: 
+      - 8123:8123
+      - 9000:9000
+      - 9009:9009
+    volumes:
+      - ./data:/var/lib/clickhouse
+      - ./log:/var/log/clickhouse-server
+    environment: 
+      - LANG=zh_CN.UTF-8
+      - LANGUAGE=zh_CN:zh
+      - LC_ALL=C
+      - TZ=PRC
+    networks:
+      - exert-clickhouse-net
+
+networks: 
+  exert-clickhouse-net:
+    name: exert-clickhouse-net
+    driver: bridge
+    
